@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <div class="row nav">
+    <div class="col-md-12">
+      <button type="button" class="btn btn-primary btn-lg" (click)="onEditItemOrder()">
+        {{ !isEditMode ? "Edit" : "Save" }}</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 item-list"
+        *ngFor="let item of itemList; let i = index; let last = last; let first = first; let odd = odd; let even = even">
+        <div class="sub-container">
+          <div class="item" id="{{ item.id }}" [style.background-color]="item.background">
+            <button (click)="onClicked()">{{item.text}}</button>
+          </div>
+          <div class="overlay-buttons" id="{{ item.id }}" *ngIf="isEditMode">
+            <a (click)="onMoveUp($event)" [className]="(i < 2)? 'hidden' : 'button-up'"><span
+                class="glyphicon glyphicon-chevron-up"></span></a>
+            <a (click)="onMoveRight($event)" [className]="(i == 1 || last || odd)? 'hidden' : 'button-right'"><span
+                class=" glyphicon glyphicon-chevron-right"></span></a>
+            <a (click)="onMoveDown($event)" [className]="(last || i === itemList.length - 2)? 'hidden' : 'button-down'">
+              <span class="glyphicon glyphicon-chevron-down"></span></a>
+            <a (click)="onMoveLeft($event)"
+              [className]="( i === itemList.length - 2 && i === itemList.length - 1 ||  even  )? 'hidden' : 'button-left'"><span
+                class="glyphicon glyphicon-chevron-left"></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
